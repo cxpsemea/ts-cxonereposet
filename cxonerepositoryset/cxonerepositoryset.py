@@ -11,11 +11,33 @@ from cxoneconn import cxoneconn
 
 class cxonereposet(baserunner) :
     
-    
-    
     # Overriding
     def printhelp(self) :
-        return
+        print( '============================================================' )
+        print( 'Checkmarx Sast Syncronizer and Merger Tool' )
+        print( '© Checkmarx. All rights reserved.' )
+        print( 'Version: ' + self.config.value('version') )
+        print( '============================================================' )
+        print( 'PARAMETERS: ')
+        print( '  --projid                The project to update, given its id (projname or scanid can be used instead)' )
+        print( '  --projname              The project to update, given its name (projid or scanid can be used instead)' )
+        print( '  --scanid                The project to update, given a scan id (projid or projname can be used instead)' )
+        print( '  --reponame              The repository url to set in the project (mandatory)' )
+        print( '  --repobranch            The repository branch to set in the project (mandatory)' )
+        print( '  --repotoken             The repositori access token, PAT, to set in the project (mandatory)' )
+        print( 'CXONE CONNECTION PARAMETERS:' )
+        print( '  --cxone.url             Your CXONE api, example: https//eu.ast.checkmarx.com (mandatory for cxone)' )
+        print( '  --cxone.acl             Your CXONE iam, example: https//eu.iam.checkmarx.com (mandatory for cxone)' )
+        print( '  --cxone.tenant          Your CXONE tenant name (mandatory for cxone)' )
+        print( '  --cxone.apikey          Api key to access your CXONE (mandatory for cxone)' )
+        print( '  --cxone.clientid        Client id to access your CXONE' )
+        print( '  --cxone.grattype        Grant type to access your CXONE')
+        print( '  --cxone.proxy_url       Network proxy to use, optional')
+        print( '  --cxone.proxy_username  User name to pass the proxy, if needed' )
+        print( '  --cxone.proxy_password  Password to pass the proxy, if needed' )
+        print( 'GENERAL OPTIONS:' )
+        print( '  --help, -h              This help information' )
+        print( '  --verbose, -v           Verbose the execution to the console' )
     
     
     def __resolve_project_id( self, cxone: cxoneconn, projid: str, projname: str, scanid: str ) :
