@@ -162,8 +162,8 @@ jobs:
       - name: Build binaries
         run: |
           sudo find shared -name *.py -exec dos2unix {} \;
-          sudo find cxoneflow -name *.py -exec dos2unix {} \;
-          sudo find cxoneflow -name *.yaml -exec dos2unix {} \;
+          sudo find cxonerepositoryset -name *.py -exec dos2unix {} \;
+          sudo find cxonerepositoryset -name *.yaml -exec dos2unix {} \;
           python -m venv ./
           . ./bin/activate
           pip install -r .build/build_requirements.txt
@@ -203,7 +203,7 @@ jobs:
           mkdir .dist
           cp .build/dockerfile .dist/Dockerfile
           cd .dist
-          curl -s -L https://github.com/cxpsemea/ts-cxoneflow/releases/latest/download/cxonerepositoryset-alpine64.tar.gz > cxonerepositoryset-alpine64.tar.gz
+          curl -s -L https://github.com/cxpsemea/ts-cxonereposet/releases/latest/download/cxonerepositoryset-alpine64.tar.gz > cxonerepositoryset-alpine64.tar.gz
           tar xzvf cxonerepositoryset-alpine64.tar.gz -C .
           rm cxonerepositoryset-alpine64.tar.gz
           docker build . -t cxonerepositoryset:latest -o - > cxonerepositoryset-docker.tar
@@ -247,7 +247,7 @@ jobs:
   #       uses: ncipollo/release-action@v1
   #       with:
   #         artifacts: .dist/*.tar.gz
-  #         name: "Checkmarx PS CxOneFlow ${{env.PS_VERSION}}" 
+  #         name: "Checkmarx PS CxOneRepositorySet ${{env.PS_VERSION}}" 
   #         tag: "${{env.PS_VERSION}}"
   #         allowUpdates: true
   #         replacesArtifacts: true
