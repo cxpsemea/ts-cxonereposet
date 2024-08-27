@@ -184,40 +184,6 @@ jobs:
           replacesArtifacts: true
 
 
-  # Docker builds          
-  build_docker:
-    needs: 
-      - process_version
-      - build_alpine
-    runs-on: ubuntu-latest
-    name: Docker Builds
-    env:
-      PS_VERSION: ${{needs.process_version.outputs.VERSION_TAG}}
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 1
-      - name: Build docker image
-        run: |
-          mkdir .dist
-          cp .build/dockerfile .dist/Dockerfile
-          cd .dist
-          curl -s -L https://github.com/cxpsemea/ts-cxonereposet/releases/latest/download/cxonerepositoryset-alpine64.tar.gz > cxonerepositoryset-alpine64.tar.gz
-          tar xzvf cxonerepositoryset-alpine64.tar.gz -C .
-          rm cxonerepositoryset-alpine64.tar.gz
-          docker build . -t cxonerepositoryset:latest -o - > cxonerepositoryset-docker.tar
-      - name: Deploy artifacts
-        # See: https://github.com/marketplace/actions/create-release
-        uses: ncipollo/release-action@v1
-        with:
-          artifacts: .dist/cxonerepositoryset-docker.tar
-          name: "Checkmarx PS CxOneRepositorySet ${{env.PS_VERSION}}" 
-          tag: "${{env.PS_VERSION}}"
-          allowUpdates: true
-          replacesArtifacts: true
-
-
   # Macos builds job
   # To activate when signing is available
   # build_macos:
