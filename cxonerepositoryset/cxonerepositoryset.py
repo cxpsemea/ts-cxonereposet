@@ -14,7 +14,7 @@ class cxonereposet(baserunner) :
     # Overriding
     def printhelp(self) :
         print( '============================================================' )
-        print( 'Checkmarx Sast Syncronizer and Merger Tool' )
+        print( 'CheckmarxOne Repository Set Tool' )
         print( '© Checkmarx. All rights reserved.' )
         print( 'Version: ' + self.config.value('version') )
         print( '============================================================' )
@@ -125,14 +125,14 @@ class cxonereposet(baserunner) :
             scanid      = self.config.value('scanid')
             reponame    = self.config.value('repository')
             repobranch  = self.config.value('branch')
-            repotoken   = self.config.value('repo-token')
+            repotoken   = self.config.value('repotoken')
             
             # Ensure we can identify the project
             if not (projid or projname or scanid) :
                 raise Exception( 'Please provide one of "projid", "projname" or "scanid" to identify your project' )
             # Ensure we have required repository data
             if not (reponame and repobranch and repotoken) :
-                raise Exception( 'Please provide all "repository", "branch", and "repo-token" to identify your repository' )
+                raise Exception( 'Please provide all "repository", "branch", and "repotoken" to identify your repository' )
             
             # Connect to target CXONE
             try :
@@ -155,7 +155,7 @@ class cxonereposet(baserunner) :
                 raise Exception( 'A matching project could not be found' )
             
             # Apply to project
-            cxlogger.verbose( 'Updating project "' + str(pid) + '"' )
+            cxlogger.verbose( 'Updating project "' + str(pid) + '" with "' + reponame + '", branch "' + repobranch + '", token "*****"' )
             self.__update_project( cxxoneconn, pid, reponame, repobranch, repotoken )
             cxlogger.verbose( 'Project "' + str(pid) + '" updated' )
     
