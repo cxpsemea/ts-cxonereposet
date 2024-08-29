@@ -123,8 +123,8 @@ class cxonereposet(baserunner) :
             projid      = self.config.value('projid')
             projname    = self.config.value('projname')
             scanid      = self.config.value('scanid')
-            reponame    = self.config.value('repository')
-            repobranch  = self.config.value('branch')
+            reponame    = self.config.value('reponame')
+            repobranch  = self.config.value('repobranch')
             repotoken   = self.config.value('repotoken')
             
             # Ensure we can identify the project
@@ -132,7 +132,7 @@ class cxonereposet(baserunner) :
                 raise Exception( 'Please provide one of "projid", "projname" or "scanid" to identify your project' )
             # Ensure we have required repository data
             if not (reponame and repobranch and repotoken) :
-                raise Exception( 'Please provide all "repository", "branch", and "repotoken" to identify your repository' )
+                raise Exception( 'Please provide all "reponame", "repobranch", and "repotoken" to identify your repository' )
             
             # Connect to target CXONE
             try :
